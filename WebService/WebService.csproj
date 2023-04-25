@@ -95,6 +95,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\Style.css" />
+    <Content Include="assets\icons\pen-to-square-solid.svg" />
+    <Content Include="assets\icons\trash-solid.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="View\default.aspx" />

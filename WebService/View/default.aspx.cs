@@ -26,9 +26,20 @@ namespace WebService.View
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            nuevoAlumno.Nombre = txtNombre.Text;
-            alumnoControl.Create(nuevoAlumno);
-            CargarDatos();
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                // El campo está vacío, mostrar una alerta
+                string mensaje = "Por favor ingrese un nombre";
+                string script = "alert('" + mensaje + "');";
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+            }
+            else
+            {
+                nuevoAlumno.Nombre = txtNombre.Text;
+                alumnoControl.Create(nuevoAlumno);
+                txtNombre.Text = "";
+                CargarDatos();
+            }
         }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
