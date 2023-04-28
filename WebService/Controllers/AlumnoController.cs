@@ -50,6 +50,44 @@ namespace WebService.Controllers
             }
         }
 
+        [ActionName("Read")]
+        [HttpGet]
+        public IQueryable<AlumnoDTO> Read(int id)
+        {
+            try
+            {
+                var alumnos = BD.Alumno.Where(c => c.ID == id).Select(c => new AlumnoDTO
+                {
+                    ID = c.ID,
+                    Nombre = c.Nombre
+                });
+                return alumnos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los registros de alumnos.", ex);
+            }
+        }
+
+        [ActionName("Read")]
+        [HttpGet]
+        public IQueryable<AlumnoDTO> Read(string nombre)
+        {
+            try
+            {
+                var alumnos = BD.Alumno.Where(c => c.Nombre == nombre).Select(c => new AlumnoDTO
+                {
+                    ID = c.ID,
+                    Nombre = c.Nombre
+                });
+                return alumnos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los registros de alumnos.", ex);
+            }
+        }
+
         [ActionName("Update")]
         [HttpPut]
         public bool Update(Alumno alumno)
@@ -99,44 +137,6 @@ namespace WebService.Controllers
             catch (Exception ex)
             {
                 return false;
-            }
-        }
-
-        [ActionName("Busqueda")]
-        [HttpGet]
-        public IQueryable<AlumnoDTO> Busqueda(int id)
-        {
-            try
-            {
-                var alumnos = BD.Alumno.Where(c => c.ID == id).Select(c => new AlumnoDTO
-                {
-                    ID = c.ID,
-                    Nombre = c.Nombre
-                });
-                return alumnos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener los registros de alumnos.", ex);
-            }
-        }
-
-        [ActionName("Busqueda")]
-        [HttpGet]
-        public IQueryable<AlumnoDTO> Busqueda(string nombre)
-        {
-            try
-            {
-                var alumnos = BD.Alumno.Where(c => c.Nombre == nombre).Select(c => new AlumnoDTO
-                {
-                    ID = c.ID,
-                    Nombre = c.Nombre
-                });
-                return alumnos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener los registros de alumnos.", ex);
             }
         }
     }

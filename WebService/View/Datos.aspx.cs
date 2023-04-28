@@ -118,7 +118,7 @@ namespace WebService.View
 
         public void CargarDatos()
         {
-            peticion.PedirComunicacion("Alumno/Busqueda/" + Convert.ToInt32(sID), MetodoHTTP.GET, TipoContenido.JSON);
+            peticion.PedirComunicacion("Alumno/Read/" + Convert.ToInt32(sID), MetodoHTTP.GET, TipoContenido.JSON);
             string respuesta = peticion.ObtenerJson();
             List<AlumnoDTO> alumnos = JsonConvertidor.Json_ListaObjeto<AlumnoDTO>(respuesta);
 
