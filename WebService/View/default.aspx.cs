@@ -15,69 +15,35 @@ namespace WebService.View
     public partial class _default : System.Web.UI.Page
     {
         PeticionHTTP peticion = new PeticionHTTP("http://localhost:54408");
-        AlumnoController alumnoControl = new AlumnoController();
-        Alumno nuevoAlumno = new Alumno();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GridView1.RowDeleting += GridView1_RowDeleting;
             CargarDatos();
         }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
+        protected void BtnCreate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNombre.Text))
-            {
-                // El campo está vacío, mostrar una alerta
-                string mensaje = "Por favor ingrese un nombre";
-                string script = "alert('" + mensaje + "');";
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
-            }
-            else
-            {
-                nuevoAlumno.Nombre = txtNombre.Text;
-                alumnoControl.Create(nuevoAlumno);
-                txtNombre.Text = "";
-                CargarDatos();
-            }
+            Response.Redirect("~/View/Datos.aspx?op=C");
         }
 
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        //Read proximamente...
+
+        protected void BtnUpdate_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "Edit")
-            {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
-                GridViewRow row = GridView1.Rows[rowIndex];
-
-                int id = Convert.ToInt32(row.Cells[0].Text); // Obtener el valor de la celda "ID"
-                string nombre = row.Cells[1].Text; // Obtener el valor de la celda "Nombre"
-
-            }
+            string id;
+            Button Consulta = (Button)sender;
+            GridViewRow selectedrow = (GridViewRow)Consulta.NamingContainer;
+            id = selectedrow.Cells[0].Text;
+            Response.Redirect("~/View/Datos.aspx?id=" + id + "&op=U");
         }
 
-        private void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void BtnDelete_Click(object sender, EventArgs e)
         {
-            // Obtener el ID del alumno a eliminar
-            GridViewRow row = GridView1.Rows[e.RowIndex];
-            int id = Convert.ToInt32(row.Cells[0].Text); // Obtener el valor de la celda "ID"
-
-            // Eliminar el alumno de la base de datos
-            Alumno alumno = new Alumno
-            {
-                ID = id
-            };
-            string enviarJson = JsonConvertidor.Objeto_Json(alumno);
-            peticion.PedirComunicacion("Alumno/Delete", MetodoHTTP.DELETE, TipoContenido.JSON);
-            peticion.enviarDatos(enviarJson);
-            string json = peticion.ObtenerJson();
-
-            CargarDatos();
-        }
-
-        private void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridView1.EditIndex = e.NewEditIndex;
-            CargarDatos();
+            string id;
+            Button Consulta = (Button)sender;
+            GridViewRow selectedrow = (GridViewRow)Consulta.NamingContainer;
+            id= selectedrow.Cells[0].Text;
+            Response.Redirect("~/View/Datos.aspx?id=" + id + "&op=D");
         }
 
         private void CargarDatos()
