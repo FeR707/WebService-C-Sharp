@@ -1,4 +1,14 @@
-# WebService-C-Sharp
+# WebService-C-Sharp 💻
+## Description 📚
+ Se desarrolla un proyecto básico en tiempo real en ASP.NET Framework, 2 formularios web y una base de datos.
 
-
-##Ejemplo de un Web Service en C# ASP.NET Framework
+-ASP.NET: Desarrollo de Formularios Web <br/>
+-Lenguajes de programación: C♯ <br/>
+-Lenguajes de etiquetas: HTML y CSS (Bootstrap CSS) <br/>
+-SQL Server.
+ 
+## App features 🪐
+- Create
+- Read (Aun no completamente)
+- Update
+- Delete 
