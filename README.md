@@ -12,3 +12,6 @@
 - Read (Aun no completamente)
 - Update
 - Delete 
+
+## Data Base
+ El proyecto cuanta con las migraciones de la base de datos, lo cual solo se necesita ejecutarlas.
