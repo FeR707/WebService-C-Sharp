@@ -124,7 +124,7 @@ namespace WebService.View
 
             if (sID != "-1")
             {
-                txtNombre.Text = alumnos.Where(x => x.ID == Convert.ToInt32(sID)).FirstOrDefault().Nombre;
+                txtNombre.Text = alumnos[0].Nombre;
             }
         }
     }
