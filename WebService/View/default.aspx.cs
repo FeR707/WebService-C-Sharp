@@ -27,17 +27,6 @@ namespace WebService.View
             Response.Redirect("~/View/Datos.aspx?op=C");
         }
 
-        protected void BtnRead_Click(object sender, EventArgs e)
-        {
-            string busqueda = txtBusqueda.Text;
-
-            peticion.PedirComunicacion("Alumno/Read/" + busqueda.ToString(), MetodoHTTP.GET, TipoContenido.JSON);
-            string respuesta = peticion.ObtenerJson();
-            List<AlumnoDTO> alumnos = JsonConvertidor.Json_ListaObjeto<AlumnoDTO>(respuesta);
-            GridView1.DataSource = alumnos;
-            GridView1.DataBind();
-        }
-
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
             string id;
@@ -58,11 +47,16 @@ namespace WebService.View
 
         private void CargarDatos()
         {
-            peticion.PedirComunicacion("Alumno/Read", MetodoHTTP.GET, TipoContenido.JSON);
+            peticion.PedirComunicacion("Alumno/ConsultarAlumnoGrupo", MetodoHTTP.GET, TipoContenido.JSON);
             string respuesta = peticion.ObtenerJson();
             List<AlumnoDTO> alumnos = JsonConvertidor.Json_ListaObjeto<AlumnoDTO>(respuesta);
             GridView1.DataSource = alumnos;
             GridView1.DataBind();
+        }
+
+        protected void BtnGrupo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/View/GrupoDatos.aspx");
         }
     }
 }

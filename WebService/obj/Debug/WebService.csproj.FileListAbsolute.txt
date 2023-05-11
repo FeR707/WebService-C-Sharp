@@ -295,9 +295,9 @@ C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\bin\es
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\bin\es\System.Web.Http.resources.dll
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\bin\es\System.Web.Http.WebHost.resources.dll
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.csproj.AssemblyReference.cache
-C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.Migrations.Nombre.resources
-C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.csproj.GenerateResource.cache
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.csproj.CoreCompileInputs.cache
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.csproj.CopyComplete
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.dll
 C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.pdb
+C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.Migrations.migration1.resources
+C:\Users\ReR-7\Documents\Visual Studio 2022\WebService-C-Sharp\WebService\obj\Debug\WebService.csproj.GenerateResource.cache

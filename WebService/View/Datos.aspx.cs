@@ -18,8 +18,6 @@ namespace WebService.View
     public partial class Datos : System.Web.UI.Page
     {
         PeticionHTTP peticion = new PeticionHTTP("http://localhost:54408");
-        AlumnoController alumnoControl = new AlumnoController();
-        Alumno nuevoAlumno = new Alumno();
 
         public static string sID = "-1";
         public static string sOpc = "";
@@ -34,6 +32,10 @@ namespace WebService.View
                     sID = Request.QueryString["id"].ToString();
                     CargarDatos();
                 }
+                else
+                {
+                    grupos();
+                }
 
                 if (Request.QueryString["op"] != null)
                 {
@@ -44,17 +46,21 @@ namespace WebService.View
                         case "C":
                             this.lbltitulo.Text = "Ingresar nuevo usuario";
                             this.BtnCreate.Visible = true;
+                            this.ddlGrupo.Visible = true;
                             break;
                         case "R":
                             break;
                         case "U":
                             this.lbltitulo.Text = "Modificar usuario";
+                            this.ddlGrupo.Visible = true;
                             this.BtnUpdate.Visible = true;
                             break;
                         case "D":
                             this.lbltitulo.Text = "Eliminar usuario";
-                            this.BtnDelete.Visible = true;
                             this.txtNombre.ReadOnly = true;
+                            this.ddlGrupo.Visible = true;
+                            this.ddlGrupo.Enabled = false;
+                            this.BtnDelete.Visible = true;
                             break;
                     }
                 }
@@ -72,8 +78,16 @@ namespace WebService.View
             }
             else
             {
-                nuevoAlumno.Nombre = txtNombre.Text;
-                alumnoControl.Create(nuevoAlumno);
+                Alumno alumno = new Alumno
+                {
+                    Nombre = txtNombre.Text,
+                    GrupoID = Convert.ToInt32(ddlGrupo.SelectedValue)
+                };
+
+                string enviarJson = JsonConvertidor.Objeto_Json(alumno);
+                peticion.PedirComunicacion("Alumno/Create", MetodoHTTP.POST, TipoContenido.JSON);
+                peticion.enviarDatos(enviarJson);
+                string json = peticion.ObtenerJson();
                 Response.Redirect("~/View/default.aspx");
             }
         }
@@ -84,7 +98,8 @@ namespace WebService.View
             {
                 // Actualizar el alumno en la base de datos
                 ID = Convert.ToInt32(sID),
-                Nombre = txtNombre.Text
+                Nombre = txtNombre.Text,
+                GrupoID = Convert.ToInt32(ddlGrupo.SelectedValue)
             };
 
             string enviarJson = JsonConvertidor.Objeto_Json(alumno);
@@ -118,13 +133,42 @@ namespace WebService.View
 
         public void CargarDatos()
         {
-            peticion.PedirComunicacion("Alumno/Read/" + Convert.ToInt32(sID), MetodoHTTP.GET, TipoContenido.JSON);
-            string respuesta = peticion.ObtenerJson();
-            List<AlumnoDTO> alumnos = JsonConvertidor.Json_ListaObjeto<AlumnoDTO>(respuesta);
+            peticion.PedirComunicacion("Grupo/Read", MetodoHTTP.GET, TipoContenido.JSON);
+            string json = peticion.ObtenerJson();
+            List<GrupoDTO> grupos = JsonConvertidor.Json_ListaObjeto<GrupoDTO>(json);
+
+            foreach (GrupoDTO grupo in grupos)
+            {
+                ListItem item = new ListItem();
+                item.Value = grupo.ID.ToString();
+                item.Text = grupo.Nombre;
+                ddlGrupo.Items.Add(item);
+            }
 
             if (sID != "-1")
             {
-                txtNombre.Text = alumnos[0].Nombre;
+                this.peticion.PedirComunicacion("Alumno/ConsultarAlumnoGrupo", MetodoHTTP.GET, TipoContenido.JSON);
+                string peticion = this.peticion.ObtenerJson();
+                List<AlumnoDTO> alumnos = JsonConvertidor.Json_ListaObjeto<AlumnoDTO>(peticion);
+
+                txtNombre.Text = alumnos.Where(x => x.ID == Convert.ToInt32(sID)).Select(x => x.Nombre).FirstOrDefault();
+                ddlGrupo.SelectedValue = alumnos.Where(x => x.ID == Convert.ToInt32(sID)).Select(x => x.GrupoID).FirstOrDefault().ToString();
+                ddlGrupo.Text = alumnos.Where(x => x.ID == Convert.ToInt32(sID)).Select(x => x.Grupo).FirstOrDefault().ToString();
+            }
+        }
+
+        public void grupos()
+        {
+            peticion.PedirComunicacion("Grupo/Read", MetodoHTTP.GET, TipoContenido.JSON);
+            string json = peticion.ObtenerJson();
+            List<GrupoDTO> grupos = JsonConvertidor.Json_ListaObjeto<GrupoDTO>(json);
+
+            foreach (GrupoDTO grupo in grupos)
+            {
+                ListItem item = new ListItem();
+                item.Value = grupo.ID.ToString();
+                item.Text = grupo.Nombre;
+                ddlGrupo.Items.Add(item);
             }
         }
     }

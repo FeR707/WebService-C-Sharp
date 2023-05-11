@@ -5,21 +5,19 @@ using System.Web;
 
 namespace WebService.Models
 {
-    public class Alumno
+    public class Grupo
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
 
-        public int GrupoID { get; set; }
-        public virtual Grupo Grupo { get; set; }
+        public virtual List<Alumno> Alumnos { get; set; }
     }
 
-    public class AlumnoDTO
+    public class GrupoDTO
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
 
-        public int GrupoID { get; set; }
-        public string Grupo { get; set; }
+        public List<AlumnoDTO> Alumnos { get; set; }
     }
 }

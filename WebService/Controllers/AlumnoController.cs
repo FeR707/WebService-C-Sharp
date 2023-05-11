@@ -15,7 +15,6 @@ namespace WebService.Controllers
 
         [ActionName("Create")]
         [HttpPost]
-
         public bool Create(Alumno alumno)
         {
             try
@@ -40,7 +39,8 @@ namespace WebService.Controllers
                               select new AlumnoDTO
                               {
                                   ID = alumno.ID,
-                                  Nombre = alumno.Nombre
+                                  Nombre = alumno.Nombre,
+                                  GrupoID = alumno.GrupoID,
                               };
                 return alumnos;
             }
@@ -50,42 +50,19 @@ namespace WebService.Controllers
             }
         }
 
-        [ActionName("Read")]
+        [ActionName("ConsultarAlumnoGrupo")]
         [HttpGet]
-        public IQueryable<AlumnoDTO> Read(int id)
+        public IQueryable<AlumnoDTO> ConsultarAlumnoGrupo()
         {
-            try
-            {
-                var alumnos = BD.Alumno.Where(c => c.ID == id).Select(c => new AlumnoDTO
-                {
-                    ID = c.ID,
-                    Nombre = c.Nombre
-                });
-                return alumnos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener los registros de alumnos.", ex);
-            }
-        }
-
-        [ActionName("Read")]
-        [HttpGet]
-        public IQueryable<AlumnoDTO> Read(string nombre)
-        {
-            try
-            {
-                var alumnos = BD.Alumno.Where(c => c.Nombre == nombre).Select(c => new AlumnoDTO
-                {
-                    ID = c.ID,
-                    Nombre = c.Nombre
-                });
-                return alumnos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener los registros de alumnos.", ex);
-            }
+            var alumnos = from Alumno in BD.Alumno
+                          select new AlumnoDTO
+                          {
+                              ID = Alumno.ID,
+                              Nombre = Alumno.Nombre,
+                              GrupoID = Alumno.GrupoID,
+                              Grupo = Alumno.Grupo.Nombre
+                          };
+            return alumnos;
         }
 
         [ActionName("Update")]
@@ -99,6 +76,7 @@ namespace WebService.Controllers
                 if (consulta != null)
                 {
                     consulta.Nombre = alumno.Nombre;
+                    consulta.GrupoID = alumno.GrupoID;
                     BD.Alumno.AddOrUpdate(consulta);
                     BD.SaveChangesAsync();
                     return true;
@@ -116,7 +94,6 @@ namespace WebService.Controllers
 
         [ActionName("Delete")]
         [HttpDelete]
-
         public bool Delete(Alumno alumno)
         {
             try

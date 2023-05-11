@@ -20,8 +20,10 @@
                     <div class="justify-content-center align-items-center my-4">
                         <h1 class="">Web Service</h1>
                         <div class="card-body d-flex justify-content-end align-items-center">
-                            <asp:Button runat="server" ID="BtnCreate" CssClass="btn btn-md btn-outline-success"
+                            <asp:Button runat="server" ID="BtnCreate" CssClass="btn btn-md btn-outline-success my-4"
                                 Text="Crear un nuevo registro" OnClick="BtnCreate_Click" />
+                            <asp:Button Text="Crear Grupo" runat="server" ID="BtnGrupo" CssClass="btn btn-md btn-outline-primary my-4"
+                                OnClick="BtnGrupo_Click" />
                         </div>
                     </div>
                 </div>
@@ -30,16 +32,17 @@
             <hr />
 
             <div class="container">
-                <div class="col-auto justify-content-md-start">
+                <%--<div class="col-auto justify-content-md-start">
                     <asp:TextBox runat="server" ID="txtBusqueda" placeholder="Buscar..." CssClass="form-control my-4" />
-                <asp:Button runat="server" ID="BtnRead" CssClass="btn btn-md btn-outline-primary" Text="Buscar" OnClick="BtnRead_Click" />  
-                </div>
+                    <asp:Button runat="server" ID="BtnRead" CssClass="btn btn-md btn-outline-primary" Text="Buscar" OnClick="BtnRead_Click" />
+                </div>--%>
 
                 <div class="table small">
                     <asp:GridView runat="server" ID="GridView1" AutoGenerateColumns="false" CssClass="table table-striped table-bordered table-hover">
                         <Columns>
                             <asp:BoundField DataField="ID" HeaderText="ID" />
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                            <asp:BoundField DataField="Grupo" HeaderText="Grupo" />
                             <asp:TemplateField HeaderText="Acciones">
                                 <ItemTemplate>
                                     <asp:Button runat="server" Text="Editar" CssClass="btn form-control-sm btn-outline-warning" ID="BtnUpdate" OnClick="BtnUpdate_Click" />

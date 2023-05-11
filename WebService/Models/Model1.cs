@@ -18,5 +18,6 @@ namespace WebService.Models
         }
 
         public virtual DbSet<Alumno> Alumno { get; set; }
+        public virtual DbSet<Grupo> Grupo { get; set; }
     }
 }

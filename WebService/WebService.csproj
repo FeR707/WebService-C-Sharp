@@ -102,21 +102,24 @@
     <Content Include="Global.asax" />
     <Content Include="View\Datos.aspx" />
     <Content Include="View\default.aspx" />
+    <Content Include="View\GrupoDatos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlumnoController.cs" />
+    <Compile Include="Controllers\GrupoController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304131920168_Nombre.cs" />
-    <Compile Include="Migrations\202304131920168_Nombre.designer.cs">
-      <DependentUpon>202304131920168_Nombre.cs</DependentUpon>
+    <Compile Include="Migrations\202305110310467_migration1.cs" />
+    <Compile Include="Migrations\202305110310467_migration1.designer.cs">
+      <DependentUpon>202305110310467_migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Alumno.cs" />
+    <Compile Include="Models\Grupo.cs" />
     <Compile Include="Models\Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Datos.aspx.cs">
@@ -132,6 +135,13 @@
     </Compile>
     <Compile Include="View\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\GrupoDatos.aspx.cs">
+      <DependentUpon>GrupoDatos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\GrupoDatos.aspx.designer.cs">
+      <DependentUpon>GrupoDatos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +162,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304131920168_Nombre.resx">
-      <DependentUpon>202304131920168_Nombre.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202305110310467_migration1.resx">
+      <DependentUpon>202305110310467_migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,8 +19,9 @@
             <div class="col-md-6">
                 <form runat="server">
                     <div class="form-group">
-                        <label for="txtNombre">Nombre</label>
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNombre"></asp:TextBox>
+                        <label for="lblNombre">Nombre</label>
+                        <asp:TextBox runat="server" CssClass="form-control mb-2" ID="txtNombre"></asp:TextBox>
+                        <asp:DropDownList ID="ddlGrupo" runat="server" CssClass="form-control" Visible="false" ></asp:DropDownList>
                     </div>
                     <asp:Button runat="server" CssClass="btn btn-outline-success btn-block mb-2" ID="BtnCreate" Text="Crear" Visible="false" OnClick="BtnCreate_Click" />
                     <asp:Button runat="server" CssClass="btn btn-outline-warning btn-block mb-2" ID="BtnUpdate" Text="Editar" Visible="false" OnClick="BtnUpdate_Click" />
