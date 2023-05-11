@@ -1,6 +1,6 @@
 # WebService-C-Sharp 💻
 ## Description 📚
- Se desarrolla un proyecto básico en tiempo real en ASP.NET Framework, 3 formularios web y una base de datos con tablas relacionales 
+ Se desarrolla un proyecto básico en tiempo real en ASP.NET Framework, 3 formularios web y una base de datos con tablas relacionales, con la libreria HTTPupt 
 
 -ASP.NET: Desarrollo de Formularios Web <br/>
 -Lenguajes de programación: C♯ <br/>
